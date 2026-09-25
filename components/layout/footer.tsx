@@ -4,10 +4,13 @@ import FooterMenu from "components/layout/footer-menu";
 import LogoSquare from "components/logo-square";
 import { getMenu } from "lib/shopify";
 import { Suspense } from "react";
+import { cacheLife } from "next/cache";
 
 const { COMPANY_NAME, SITE_NAME } = process.env;
 
 export default async function Footer() {
+  "use cache";
+  cacheLife("days");
   const currentYear = new Date().getFullYear();
   const copyrightDate = 2023 + (currentYear > 2023 ? `-${currentYear}` : "");
   const skeleton =
